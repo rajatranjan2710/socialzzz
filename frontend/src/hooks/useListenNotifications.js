@@ -8,16 +8,6 @@ export const useListenNotifications = () => {
   const { socket } = useSocketStore();
   const { user } = useAuthStore();
 
-  //   useEffect(() => {
-  //     if (!socket) return;
-
-  //     const handleNewNotification = (data) => {
-  //       alert(data)
-
-  //     socket.on("newMessage", handleNewNotification);
-  //     return () => socket.off("newMessage", handleNewNotification);
-  //   }, [socket]);
-
   const { appNotifications, setAppNotifications } = useNotificationStore();
 
   useEffect(() => {
