@@ -52,7 +52,7 @@ expressApp.use("/api/v1/notification", NotiRouter);
 expressApp.use(express.static(path.join(__dirname, "../frontend/dist")));
 
 // API root endpoint
-expressApp.get("/", (req, res) => {
+expressApp.get("/gg", (req, res) => {
   res.json({ hello: "Hello World!" });
 });
 
