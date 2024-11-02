@@ -49,7 +49,7 @@ expressApp.use("/api/v1/vlog", VlogRouter);
 expressApp.use("/api/v1/notification", NotiRouter);
 
 // Serve static files from the frontend build directory
-expressApp.use(express.static(path.join(__dirname, "/frontend/build")));
+expressApp.use(express.static(path.join(__dirname, "../frontend/dist")));
 
 // API root endpoint
 expressApp.get("/", (req, res) => {
@@ -58,7 +58,7 @@ expressApp.get("/", (req, res) => {
 
 // Catch-all route for the frontend application
 expressApp.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
 
 // Start the server

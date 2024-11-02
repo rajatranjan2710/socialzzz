@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"; // Add Navigate here
 import LoginPage from "./pages/LoginPage";
 import Home from "./pages/Home";
 import SignupPage from "./pages/SignupPage";
@@ -14,6 +14,7 @@ import { useSetNotification } from "./hooks/useSetNotification";
 import { useListenMessage } from "./hooks/useListenMessage";
 import { useListenNotifications } from "./hooks/useListenNotifications";
 import { useFetchNotifications } from "./hooks/useFetchNotifications";
+import PrivateRoute from "./Components/PrivateRoute";
 
 const App = () => {
   //auth check
@@ -28,11 +29,8 @@ const App = () => {
   }, []);
 
   //socket connection
-
   React.useEffect(() => {
-    // console.log("In socket connection --> App.jsx", isAuthenticated, user);
     if (user) {
-      // console.log("SoccketConnected");
       connectSocket(user._id);
     } else {
       disconnectSocket();
@@ -45,7 +43,6 @@ const App = () => {
 
   useListenMessage();
   useListenNotifications();
-
   useFetchNotifications();
 
   return (
@@ -53,17 +50,56 @@ const App = () => {
       <Routes>
         <Route
           path="/login"
-          element={isAuthenticated ? <Home /> : <LoginPage />}
+          element={
+            isAuthenticated && user ? <Navigate to="/" /> : <LoginPage />
+          }
         />
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }
+        />
         <Route
           path="/signup"
-          element={isAuthenticated ? <Home /> : <SignupPage />}
+          element={
+            isAuthenticated && user ? <Navigate to="/" /> : <SignupPage />
+          }
         />
-        <Route path="/vlog" element={<VlogPage />} />
-        <Route path="/settings" element={<SettingsPage />} />
-        <Route path="/chats" element={<ChatPage />} />
-        <Route path="/profile/:id" element={<ProfilePage />} />
+        <Route
+          path="/vlog"
+          element={
+            <PrivateRoute>
+              <VlogPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <PrivateRoute>
+              <SettingsPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/chats"
+          element={
+            <PrivateRoute>
+              <ChatPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile/:id"
+          element={
+            <PrivateRoute>
+              <ProfilePage />
+            </PrivateRoute>
+          }
+        />
       </Routes>
       <Toaster />
     </BrowserRouter>
