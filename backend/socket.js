@@ -8,7 +8,7 @@ const expressApp = express();
 const server = http.createServer(expressApp);
 const io = new Server(server, {
   cors: {
-    origin: "https://socialite-snowy.vercel.app/",
+    origin: "http://localhost:5173",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
   },

@@ -22,7 +22,7 @@ const __dirname = dirname(__filename);
 // Middleware setup
 expressApp.use(
   cors({
-    origin: "https://socialite-snowy.vercel.app/",
+    origin: "http://localhost:5173",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
@@ -52,7 +52,7 @@ expressApp.use("/api/v1/notification", NotiRouter);
 expressApp.use(express.static(path.join(__dirname, "../frontend/dist")));
 
 // API root endpoint
-expressApp.get("/gg", (req, res) => {
+expressApp.get("/", (req, res) => {
   res.json({ hello: "Hello World!" });
 });
 
