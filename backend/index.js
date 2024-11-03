@@ -22,7 +22,7 @@ const __dirname = dirname(__filename);
 // Middleware setup
 expressApp.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://socialite-be79.onrender.com",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
