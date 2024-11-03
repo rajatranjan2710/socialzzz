@@ -9,7 +9,7 @@ export const useLikeAndDislikePost = () => {
     console.log(id);
     try {
       const response = await axios.post(
-        `https://socialite-snowy.vercel.app/api/v1/posts/like/${id}`,
+        `https://socialite-be79.onrender.com/api/v1/posts/like/${id}`,
         {},
         {
           withCredentials: true,
@@ -28,7 +28,7 @@ export const useLikeAndDislikePost = () => {
   const likeVlog = async (id, user) => {
     try {
       const response = await axios.post(
-        `https://socialite-snowy.vercel.app/api/v1/vlog/like/${id}`,
+        `https://socialite-be79.onrender.com/api/v1/vlog/like/${id}`,
         {},
         { withCredentials: true }
       );
